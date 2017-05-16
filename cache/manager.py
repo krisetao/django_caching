@@ -1,6 +1,6 @@
 # coding: utf-8
 from cache.service import CacheService
-from config.constants import ONE_DAY
+from cache.constants import ONE_DAY
 from django.conf import settings
 from django.core.cache import caches
 from django.db import models
