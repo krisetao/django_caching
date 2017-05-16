@@ -6,13 +6,13 @@ django_caching是一个十分易于使用的针对model的缓存插件。原理�
 
 ### 使用方法：
 
-首先从pypi上下载安装：
+1、从pypi上下载安装：
 
 ```
 sudo pip install django_caching
 ```
 
-在项目的`settings.py`里面的`INSTALLED_APPS`里加入`cache`:
+2、在项目的`settings.py`里面的`INSTALLED_APPS`里加入`cache`:
 
 ```Python
 INSTALLED_APPS = (
@@ -21,7 +21,7 @@ INSTALLED_APPS = (
 )
 ```
 
-然后在`CACHES`里面加入`cache_manager`和`test`：
+3、在`CACHES`里面加入`cache_manager`和`test`：
 
 ```Python
 CACHES = {
@@ -43,15 +43,15 @@ CACHES = {
 }
 ```
 
-然后执行：
+4、执行：
 
 ```Sh
 python manage.py migrate
 ```
 
-这样配置就完成了。
+这样安装配置阶段就完成了。
 
-然后在所有需要使用的models中进行修改：
+5、在所有需要使用的models中进行修改：
 
 ```Python
 from django.db import models
@@ -66,7 +66,7 @@ class DemoModel(models.Model):
     cached_objects = CacheManager()
 ```
 
-之后将代码中所有用到`DemoModel.objects`的地方改成`DemoModel.cached_objects`，在所有用到`get_object_or_404`的地方改成：
+6、将代码中所有用到`DemoModel.objects`的地方改成`DemoModel.cached_objects`，在所有用到`get_object_or_404`的地方改成：
 
 ```Python
 from cache.shortcuts import get_cached_object_or_404
@@ -76,13 +76,17 @@ from demo.models import DemoModel
 demo = get_cached_object_or_404(DemoModel, title='demo')
 ```
 
-**一定要用cached_objects和get_cached_object_or_404，否则如果进行了更改，save或者delete之后不会自动invalidate cache！ **
+Done！Great job！
+
+#### 友情提醒：
 
 **一定要用cached_objects和get_cached_object_or_404，否则如果进行了更改，save或者delete之后不会自动invalidate cache！ **
 
 **一定要用cached_objects和get_cached_object_or_404，否则如果进行了更改，save或者delete之后不会自动invalidate cache！ **
 
-(或者也可以直接`objects = CacheManager()`)
+**一定要用cached_objects和get_cached_object_or_404，否则如果进行了更改，save或者delete之后不会自动invalidate cache！ **
+
+(或者在第5步也可以直接用`objects = CacheManager()`，这样不用修改代码了，但是不推荐)
 
 
 本项目由[九章算法](www.jiuzhang.com)开发维护并开源，[九章算法](www.jiuzhang.com)——硅谷顶尖IT企业工程师实时在线授课为您传授面试技巧, 帮助更多中国人找到好工作。
