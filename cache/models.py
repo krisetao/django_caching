@@ -6,6 +6,7 @@ from django.db.models.signals import (
     pre_delete,
     m2m_changed,
 )
+
 from cache.listeners import (
     invalidate_model_cache,
     invalidate_m2m_cache,

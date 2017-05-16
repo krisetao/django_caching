@@ -82,6 +82,7 @@ demo = get_cached_object_or_404(DemoModel, title='demo')
 
 **一定要用cached_objects和get_cached_object_or_404，否则如果进行了更改，save或者delete之后不会自动invalidate cache！ **
 
+(或者也可以直接`objects = CacheManager()`)
 
 
 本项目由[九章算法](www.jiuzhang.com)开发维护并开源，[九章算法](www.jiuzhang.com)——硅谷顶尖IT企业工程师实时在线授课为您传授面试技巧, 帮助更多中国人找到好工作。

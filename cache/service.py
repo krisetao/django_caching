@@ -1,15 +1,15 @@
-from cache.models import Invalidation
-from django.conf import settings
-from django.core.cache import caches
-from django.contrib.contenttypes.models import ContentType
-
 import uuid
+
+from django.conf import settings
+from django.contrib.contenttypes.models import ContentType
+from django.core.cache import caches
+
+from cache.models import Invalidation
 
 cache = caches['test'] if settings.TESTING else caches['cache_manager']
 
 
 class CacheService(object):
-
     @classmethod
     def bulk_create_invalidation(cls, cached_objects, key, sql):
         # remove the existing invalidations
@@ -48,7 +48,7 @@ class CacheService(object):
             cls._reset_namespace(obj._meta.db_table)
             return
 
-        # TODO (jason): Think about raise condition
+        # TODO: Think about raise condition
         # if new invalidation created when invalidating
         # what will happen?
         #

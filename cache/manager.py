@@ -1,21 +1,21 @@
 # coding: utf-8
-from cache.service import CacheService
-from cache.constants import ONE_DAY
+import hashlib
+import logging
+
 from django.conf import settings
 from django.core.cache import caches
 from django.db import models
 from django.db.models.query import QuerySet
 from django.db.models.sql import EmptyResultSet
 
-import hashlib
-import logging
+from cache.constants import ONE_DAY
+from cache.service import CacheService
 
 cache = caches['test'] if settings.TESTING else caches['cache_manager']
 logger = logging.getLogger(__name__)
 
 
 class CachedQuerySet(QuerySet):
-
     def __init__(self, *args, **kwargs):
         self.timeout = kwargs.get('timeout', ONE_DAY)
         if 'timeout' in kwargs:
@@ -72,7 +72,6 @@ class CachedQuerySet(QuerySet):
 
 
 class CacheManager(models.Manager):
-
     def __init__(self, *args, **kwargs):
         self.timeout = kwargs.get('timeout', ONE_DAY)
         if 'timeout' in kwargs:
