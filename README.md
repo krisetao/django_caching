@@ -70,11 +70,11 @@ from demo.models import DemoModel
 demo = get_cached_object_or_404(DemoModel, title='demo')
 ```
 
-__一定要用cached_objects和get_cached_object_or_404，否则如果进行了更改，save或者delete之后不会自动invalidate cache！ __
+**一定要用cached_objects和get_cached_object_or_404，否则如果进行了更改，save或者delete之后不会自动invalidate cache！ **
 
-__一定要用cached_objects和get_cached_object_or_404，否则如果进行了更改，save或者delete之后不会自动invalidate cache！ __
+**一定要用cached_objects和get_cached_object_or_404，否则如果进行了更改，save或者delete之后不会自动invalidate cache！ **
 
-__一定要用cached_objects和get_cached_object_or_404，否则如果进行了更改，save或者delete之后不会自动invalidate cache！ __
+**一定要用cached_objects和get_cached_object_or_404，否则如果进行了更改，save或者delete之后不会自动invalidate cache！ **
 
 
 
