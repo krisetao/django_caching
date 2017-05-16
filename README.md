@@ -6,6 +6,12 @@ django_caching是一个十分易于使用的针对model的缓存插件。原理�
 
 ### 使用方法：
 
+首先从pypi上下载安装：
+
+```
+sudo pip install django_caching
+```
+
 在项目的`settings.py`里面的`INSTALLED_APPS`里加入`cache`:
 
 ```Python
