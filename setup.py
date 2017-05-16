@@ -40,7 +40,7 @@ setup(
     author='NineChapter',
     author_email='daniel48@126.com',
     maintainer='NineChapter',
-    maintainer_email='daniel48@126.com',
+    maintainer_email='info@ninechapter.com',
     download_url='https://github.com/ninechapter/django_caching',
     url='https://github.com/ninechapter/django_caching',
 
