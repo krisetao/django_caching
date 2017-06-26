@@ -1,3 +1,4 @@
+# coding:utf-8
 import logging
 
 logger = logging.getLogger(__name__)
@@ -12,7 +13,7 @@ def invalidate_model_cache(sender, instance, **kwargs):
     # is not correct.
     if not hasattr(instance.__class__, 'cached_objects'):
         return
-    logger.debug('Invalidating model cache for {} {}'.format(sender, instance))
+    logger.debug(u'Invalidating model cache for {} {}'.format(sender, instance))
     CacheService.invalidate_cache_for(instance)
 
 
@@ -21,5 +22,5 @@ def invalidate_m2m_cache(sender, instance, model, **kwargs):
 
     if not hasattr(instance.__class__, 'cached_objects'):
         return
-    logger.debug('Invalidating m2m cache for {} {} {}'.format(sender, instance, model))
+    logger.debug(u'Invalidating m2m cache for {} {} {}'.format(sender, instance, model))
     CacheService.invalidate_cache_for(instance)
