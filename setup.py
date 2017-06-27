@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='django_caching',
-    version='1.0.0',
+    version='1.1.0',
     keywords=('django', 'cache', 'caching'),
     description='A easy using django cache manager.',
     classifiers=[
