@@ -1,29 +1,45 @@
-# django_caching 使用文档
+# django_caching
 
-##### 本项目由[九章算法](http://www.jiuzhang.com)开发维护并开源，[九章算法](http://www.jiuzhang.com)——硅谷顶尖IT企业工程师实时在线授课为您传授面试技巧, 帮助更多中国人找到好工作。
+**django_caching** is an easy-to-use cache plugin for models in Django.
 
-django_caching是一个十分易于使用的针对model的缓存插件。原理是缓存下所有用过的sql，这样下次执行同一条sql的时候就不需要真正进行db query了。并且django_caching会自动进行cache的invalidation（save或者delete的时候），不需要人工干预。
+## How does it work?
 
-### 使用方法：
+**django_caching** caches all SQL queries called when cached objects requested. When the same SQL queries being excuted, there's no real database IO anymore.
 
-1、从pypi上下载安装：
+**django_caching** automatically invalidates cache item when `save` or `delete`. 
 
+## Compatibility
+
+**django_caching** works well with Django 1.8 - 1.11 .
+
+## Installation
+
+You can install `django_caching` by `pip`
+
+```shell
+pip install django_caching
 ```
-sudo pip install django_caching
-```
 
-2、在项目的`settings.py`里面的`INSTALLED_APPS`里加入`cache`:
+It's also okay to install by clone this reposity.
 
-```Python
+## Usage
+
+### Step 1
+
+Add `cache` in `INSTALLED_APPS` of your settings.
+
+```python
 INSTALLED_APPS = (
-    ...,
-    'cache',
+  ...,
+  'cache',
 )
 ```
 
-3、在`CACHES`里面加入`cache_manager`和`test`：
+### Step 2
 
-```Python
+Add `cache_manager` and `test` in `CACHES` of your settings.
+
+```python
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
@@ -43,30 +59,44 @@ CACHES = {
 }
 ```
 
-4、执行：
+### Step 3
 
-```Sh
+You should run `migrate` to apply the changes above.
+
+```sh
 python manage.py migrate
 ```
 
-5、在所有需要使用的models中进行修改：
+### Step 4
 
-```Python
+Modify the models which you need to cache like this:
+
+```python
 from django.db import models
 from cache.manager import CacheManager
+from cache.constants import ONE_WEEK
+# We have pre-define some constants for the duration time.
+# You can also use number directly in denomination of second.
 
 class DemoModel(models.Model):
     title = models.CharField('Demo', max_length=255)
-    ……
-    
-    # for cache
-    objects = models.Manager()
-    cached_objects = CacheManager()
+    ……
+
+    objects = models.Manager() # Use native Manager when 'objects' called 
+    cached_objects = CacheManager(timeout=ONE_WEEK)
+    # Use CacheManage when 'cached_objects' called.
+    # timeout is defaultly set to ONE_DAY
 ```
 
-6、将代码中所有用到`DemoModel.objects`的地方改成`DemoModel.cached_objects`，在所有用到`get_object_or_404`的地方改成：
+Be careful ! `django_caching` wouldn't work properly if you give `CacheManager` another name instead of `cached_objects`.
 
-```Python
+### Step 5
+
+Replace `DemoModel.objects` with `DemoModel.cached_objects` wherever you need cache.
+
+We also provide a `get_cached_object_or_404` method to replace native `get_object_or_404` method.
+
+```python
 from cache.shortcuts import get_cached_object_or_404
 from demo.models import DemoModel
 
@@ -78,19 +108,25 @@ demos = DemoModel.cached_objects.all()
 demos2 = DemoModel.cached_objects.filter(title__icontains='demo')
 ```
 
-Done！Great job！
+### Step 6
 
-#### 友情提醒：
-
-**一定要用cached_objects和get_cached_object_or_404，否则如果进行了更改，save或者delete之后不会自动invalidate cache！ **
-
-**一定要用cached_objects和get_cached_object_or_404，否则如果进行了更改，save或者delete之后不会自动invalidate cache！ **
-
-**一定要用cached_objects和get_cached_object_or_404，否则如果进行了更改，save或者delete之后不会自动invalidate cache！ **
-
-(或者在第5步也可以直接用`objects = CacheManager()`，这样不用修改代码了，但是不推荐)
+Have a coffee and enjoy the easy cache for your Django project!
 
 
-##### 本项目由[九章算法](http://www.jiuzhang.com)开发维护并开源，[九章算法](http://www.jiuzhang.com)——硅谷顶尖IT企业工程师实时在线授课为您传授面试技巧, 帮助更多中国人找到好工作。
 
-文档编辑：[Pure White](https://purewhite.io)
+## Watch Out!
+
+**Cache can ONLY be invalidated automatically** when called by `cached_objects` or `get_cached_object_or_404` .
+
+
+
+## Contributing
+
+This package is maintained by [Jiuzhang](http://www.jiuzhang.com).
+
+If you find a bug, you can open an issue and we will reply ASAP.
+
+You can contribute to this reposity by opening a pull request. We are glad to accept contribution from community.
+
+
+
