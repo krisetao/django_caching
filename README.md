@@ -20,7 +20,7 @@ You can install `django_caching` by `pip`
 pip install django_caching
 ```
 
-It's also okay to install by clone this reposity.
+It's also okay to install by clone this repository.
 
 ## Usage
 
@@ -126,7 +126,7 @@ This package is maintained by [Jiuzhang](http://www.jiuzhang.com).
 
 If you find a bug, you can open an issue and we will reply ASAP.
 
-You can contribute to this reposity by opening a pull request. We are glad to accept contribution from community.
+You can contribute to this repository by opening a pull request. We are glad to accept contribution from community.
 
 
 
