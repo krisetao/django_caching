@@ -18,6 +18,7 @@ You can install `django_caching` by `pip`
 
 ```shell
 pip install django_caching
+pip install python-memcached
 ```
 
 It's also okay to install by clone this repository.
@@ -40,6 +41,7 @@ INSTALLED_APPS = (
 Add `cache_manager` and `test` in `CACHES` of your settings.
 
 ```python
+TESTING = {}
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
@@ -64,6 +66,7 @@ CACHES = {
 You should run `migrate` to apply the changes above.
 
 ```sh
+python manage.py makemigrations
 python manage.py migrate
 ```
 
