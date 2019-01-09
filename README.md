@@ -132,7 +132,8 @@ If you find a bug, you can open an issue and we will reply ASAP.
 You can contribute to this repository by opening a pull request. We are glad to accept contribution from community.
 
 ## TypeError
-  django2.0 have erro: __init__() missing 1 required positional argument: 'on_delete'
+  django2.0 have error: __init__() missing 1 required positional argument: 'on_delete'
+  
   countermeasure：models this alter - content_type = models.ForeignKey(ContentType, null=True,on_delete=models.CASCADE)
   
 
