@@ -31,7 +31,7 @@ class Invalidation(models.Model):
 
     key = models.CharField(max_length=255, help_text='cache key', db_index=True)
     object_id = models.IntegerField()
-    content_type = models.ForeignKey(ContentType, null=True)
+    content_type = models.ForeignKey(ContentType, null=True,on_delete=models.CASCADE)
     cached_object = GenericForeignKey('content_type', 'object_id')
 
     # for admin
