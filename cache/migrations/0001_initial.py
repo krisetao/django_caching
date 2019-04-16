@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
                 ('count', models.IntegerField(null=True)),
                 ('created_at', models.DateTimeField(auto_now_add=True, null=True)),
                 ('class_name', models.CharField(max_length=255, null=True)),
-                ('content_type', models.ForeignKey(to='contenttypes.ContentType', null=True)),
+                ('content_type', models.ForeignKey(to='contenttypes.ContentType', null=True,on_delete=models.CASCADE)),
             ],
         ),
         migrations.AlterIndexTogether(
